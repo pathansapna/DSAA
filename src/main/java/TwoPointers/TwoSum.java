@@ -1,4 +1,4 @@
-package arrayPrograms;
+package TwoPointers;
 
 /*Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number. Let these two numbers be numbers[index1] and numbers[index2] where 1 <= index1 < index2 <= numbers.length.
 
@@ -22,16 +22,23 @@ public class TwoSum {
         sum(a, target);
     }
 
-    private static void sum(int[] a, int target) {
-        for(int i = 0; i <= a.length; i++){
-            for (int j = i+1; j <a.length; j++){
-                if( a[i] + a[j] == target) {
-//                   return [i, j];
-                }
-            }
+    private static int[] sum(int[] a, int target) {
+       int start_pointer = 0;
+       int end_pointer = a.length - 1;
 
+       while(start_pointer <= end_pointer){
+           int sum = a[start_pointer] + a[end_pointer];
 
-        }
+           if (sum > target){
+               end_pointer -= 1;
 
+           }else if (sum < target){
+               start_pointer += 1;
+           }else {
+               return new int[] {start_pointer + 1, end_pointer + 1};
+           }
+       }
+
+        return new int[] {start_pointer + 1, end_pointer + 1};
     }
 }
